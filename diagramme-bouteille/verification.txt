@@ -1,0 +1,75 @@
+VÉRIFICATION — Diagramme à contacts « Laboratoire combinatoire : La bouteille »
+==============================================================================
+Tout ce qui suit est calculé à partir du schéma dessiné : les noeuds sont
+reconstruits depuis les coordonnées des fils, puis le circuit est simulé
+(contacts NO/NF, relais, temporisations). Les équations ne sont pas utilisées.
+
+1. TABLE DE VÉRITÉ (16 combinaisons, état des lumières pendant l'affichage)
+
+    #   a b c d    Verte  Jaune  Rouge   lumières allumées
+   ---  -------    -----  -----  -----   -----------------
+    0   0 0 0 0      0      0      1             1
+    1   0 0 0 1      0      0      1             1
+    2   0 0 1 0      0      0      1             1
+    3   0 0 1 1      0      0      1             1
+    4   0 1 0 0      0      0      1             1
+    5   0 1 0 1      0      1      0             1
+    6   0 1 1 0      1      0      0             1
+    7   0 1 1 1      0      0      1             1
+    8   1 0 0 0      0      0      1             1
+    9   1 0 0 1      0      0      1             1
+   10   1 0 1 0      0      1      0             1
+   11   1 0 1 1      0      0      1             1
+   12   1 1 0 0      0      0      1             1
+   13   1 1 0 1      0      0      1             1
+   14   1 1 1 0      0      0      1             1
+   15   1 1 1 1      0      0      1             1
+
+   Attendu : Verte = 1 seulement pour 0110 (#6) ; Jaune = 1 seulement pour
+   0101 (#5) et 1010 (#10) ; Rouge = 1 pour les 13 autres ; une seule lumière
+   par combinaison.
+   Résultat : CONFORME
+
+2. CHRONOGRAMME (Marche appuyé à t = 0, relâché à t = 0,2 s)
+
+   Combinaison #6 (abcd = 0110) — lumière verte
+     t =   0.000 s : Analyse, Automaintient
+     t =   3.173 s : Affichage lum, Analyse, Automaintient, LumVert, SonHautParleur
+     t =   4.523 s : Affichage lum, Analyse, Automaintient, LumVert
+     t =  12.930 s : tout éteint
+
+   Combinaison #5 (abcd = 0101) — lumière jaune
+     t =   0.000 s : Analyse, Automaintient
+     t =   3.173 s : Affichage lum, Analyse, Automaintient, LumJaune, SonHautParleur
+     t =   5.873 s : Affichage lum, Analyse, Automaintient, LumJaune
+     t =  12.930 s : tout éteint
+
+   Combinaison #0 (abcd = 0000) — lumière rouge
+     t =   0.000 s : Analyse, Automaintient
+     t =   3.173 s : Affichage lum, Analyse, Automaintient, LumRouge, SonHautParleur
+     t =   7.223 s : Affichage lum, Analyse, Automaintient, LumRouge
+     t =  12.930 s : tout éteint
+
+   Allumage de la lumière ............ t = 3,173 s (après Marche)
+   Bip LumVert   .................... 1,35 s (de 3,173 s à 4,523 s)
+   Bip LumJaune  .................... 2,7 s (de 3,173 s à 5,873 s)
+   Bip LumRouge  .................... 4,05 s (de 3,173 s à 7,223 s)
+   Fin du cycle (tout éteint) ........ t = 12,93 s, soit 9,757 s après l'allumage
+   Vérifié sur les 16 combinaisons : CONFORME
+
+3. CONTRÔLES DU DESSIN (calculés sur la géométrie du SVG)
+
+   Bornes laissées libres : 0
+   Extrémités de fil non raccordées : 0
+   Croisements de fils sans jonction : 0
+   Fils traversant un symbole : 0
+   Textes superposés : 0
+   Textes touchant un fil : 0
+   Textes touchant un symbole : 0
+   Bobines reliées au rail 0 V : 7 / 7
+   Bobines alignées dans une seule colonne : oui
+   Points de jonction dessinés : 28 (un par jonction réelle, placés automatiquement)
+   Résultat : CONFORME
+   Le PNG a aussi été relu à l'oeil après le rendu.
+
+BILAN : TOUTES LES VÉRIFICATIONS RÉUSSIES
